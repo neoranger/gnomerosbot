@@ -8,7 +8,6 @@ import os
 import token
 import user
 import feedparser
-import owners
 import logging
 import commands
 import subprocess
@@ -58,7 +57,7 @@ def command_support(m):
     markup = types.InlineKeyboardMarkup()
     itembtnneo = types.InlineKeyboardButton('NeoRanger', url="telegram.me/NeoRanger")
     itembtnblog = types.InlineKeyboardButton('URL Blog', url="http://www.neositelinux.com")
-    itembtnrepo = types.InlineKeyboardButton('Repo Github', url="http://github.com/kernelpanicblog/manjarobot")
+    itembtnrepo = types.InlineKeyboardButton('Repo Github', url="http://github.com/neoranger")
     markup.row(itembtnneo)
     markup.row(itembtnblog)
     markup.row(itembtnrepo)
