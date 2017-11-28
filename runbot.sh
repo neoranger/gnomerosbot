@@ -1,7 +1,7 @@
 #!/bin/bash
 while true
 do
-python gnomerosbot.py
+python /home/pi/Documents/git/gnomerosbot/gnomerosbot.py
 echo "¡The bot is crashed!"
 echo "Rebooting in:"
 for i in 1
