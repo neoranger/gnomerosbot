@@ -17,6 +17,32 @@ TOKEN = token.token_id
 bot = telebot.TeleBot(TOKEN) # Creating our bot object.
 bot.skip_pending=True
 
+#######################################
+#Function for feedparser
+#CODE TAKEN FROM:
+#https://gist.github.com/Jeshwanth/99cf05f4477ab0161349
+def get_feed(url):
+    try:
+        feed = feedparser.parse(url)
+    except:
+        return 'Invalid url.'
+    y = len(feed[ "items" ])
+    y = 5 if y > 5 else y
+    if(y < 1):
+        return 'Nothing found'
+    lines = ['*Feed:*']
+    for x in range(y):
+        lines.append('- [{}]({})'.format(feed['items'][x]['title'].replace(']', ':').replace('[', '').encode('utf-8'), feed['items'][x]['link']))
+    return '\n'.join(lines)
+#    for x in range(y):
+#        lines.append(
+#        u'-&gt <a href="{1}">{0}</a>.'.format(
+#        u'' + feed[ "items" ][x][ "title" ],
+#        u'' + feed[ "items" ][x][ "link" ]))
+#    return u'' + '\n'.join(lines)
+
+#######################################
+
 #Functions
 @bot.message_handler(content_types=['new_chat_members'])
 def command_new_user(m):
@@ -70,6 +96,13 @@ def command_github(m):
     itembtngit = types.InlineKeyboardButton('GnomerosBot', url="http://github.com/neoranger/gnomerosbot")
     markup.row(itembtngit)
     bot.send_message(m.chat.id, 'Repositorio GITHUB:',reply_markup=markup)
+
+@bot.message_handler(commands=['gnomefeed'])
+def manjaro_feed(m):
+    cid = m.chat.id
+    url = str("https://gnome.org/feed/")
+    print (url)
+    bot.send_message(cid, get_feed(url),disable_web_page_preview=True,parse_mode="markdown")
     
 ###############################################################################
 print('Bot Initiated')
