@@ -98,9 +98,16 @@ def command_github(m):
     bot.send_message(m.chat.id, 'Repositorio GITHUB:',reply_markup=markup)
 
 @bot.message_handler(commands=['gnomefeed'])
-def manjaro_feed(m):
+def gnome_feed(m):
     cid = m.chat.id
     url = str("https://gnome.org/feed/")
+    print (url)
+    bot.send_message(cid, get_feed(url),disable_web_page_preview=True,parse_mode="markdown")
+
+@bot.message_handler(commands=['planetgnome'])
+def planet_gnome(m):
+    cid = m.chat.id
+    url = str("https://planet.gnome.org/atom.xml")
     print (url)
     bot.send_message(cid, get_feed(url),disable_web_page_preview=True,parse_mode="markdown")
     
